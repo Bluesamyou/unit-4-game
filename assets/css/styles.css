@@ -209,9 +209,6 @@ h1 {
   margin-left: -50px;
 }
 
-.game-card:not(:first-child) {
-  margin-left: -50px;
-}
 
 .card:hover {
   transform: translateY(-20px);

@@ -58,8 +58,8 @@ $(document).ready(function () {
 
         appendCard.append(`<img src="${gameState.character.image}" alt="card image" class="rounded-circle card-image" width="100" height="100"> `)
         appendCard.append(`<h5 class="title">${gameState.character.displayName}</h5>`)
-        appendCard.append(`<p class="card-attr" style="color:pink;"> ❤️${gameState.character.health} </p>`)
-        appendCard.append(`<p class="card-attr"style="color:yellow; margin-top: 5px;"> 👊${gameState.character.baseAttack} </p>`)
+        appendCard.append(`<p class="card-attr health" style="color:pink;"> ❤️${gameState.character.health} </p>`)
+        appendCard.append(`<p class="card-attr power"style="color:yellow; margin-top: 5px;"> 👊${gameState.character.baseAttack} </p>`)
 
         $('.character-card').append(appendCard)
 
@@ -69,10 +69,16 @@ $(document).ready(function () {
 
         appendCard.append(`<img src="${gameState.enemy.image}" alt="card image" class="rounded-circle card-image" width="100" height="100"> `)
         appendCard.append(`<h5 class="title">${gameState.enemy.displayName}</h5>`)
-        appendCard.append(`<p class="card-attr" style="color:pink;"> ❤️${gameState.enemy.health} </p>`)
-        appendCard.append(`<p class="card-attr"style="color:yellow; margin-top: 5px;"> 👊${gameState.enemy.baseAttack} </p>`)
+        appendCard.append(`<p class="card-attr health" style="color:pink;"> ❤️${gameState.enemy.health} </p>`)
+        appendCard.append(`<p class="card-attr power"style="color:yellow; margin-top: 5px;"> 👊${gameState.enemy.baseAttack} </p>`)
 
         $('.enemy-card').append(appendCard)
+
+        gameState.enemyarray.map(function(enemy){
+            var enemyimage = $('<img>'). attr({class : "rounded enemy-image", src : characters[enemy].image , width : 50, height : 50, style: "padding: 1px;"})
+            $('.remaining-enemies').append(enemyimage)
+
+        })
     }
 
     Object.keys(characters).map(function (character) {
@@ -83,15 +89,44 @@ $(document).ready(function () {
 
         appendCard.append(`<img src="${characters[character].image}" alt="card image" class="rounded-circle card-image" width="100" height="100"> `)
         appendCard.append(`<h5 class="title">${characters[character].displayName}</h5>`)
-        appendCard.append(`<p class="card-attr" style="color:pink;"> ❤️${characters[character].health} </p>`)
-        appendCard.append(`<p class="card-attr"style="color:yellow; margin-top: 5px;"> 👊${characters[character].baseAttack} </p>`)
+        appendCard.append(`<p class="card-attr health" style="color:pink;"> ❤️${characters[character].health} </p>`)
+        appendCard.append(`<p class="card-attr power"style="color:yellow; margin-top: 5px;"> 👊${characters[character].baseAttack} </p>`)
 
         $('.container-card').append(appendCard)
 
-        gameState.enemyarray.map(function(enemy){
-            var enemyimage = $('<img>'). attr({class : "", src : enemy.image , width : 50, height : 50})
-            $('.remaining-enemies').append(enemyimage)
-        })
+
+    })
+
+    // util sleep function to delay the resetting of classes
+    function sleep(ms) {
+        return new Promise(resolve => setTimeout(resolve, ms));
+      }
+      
+
+    $('#attack').on("click", function(){
+        if(gameState.character.health <= 0){
+
+        }
+        else if (gameState.enemy.health <= 0){
+
+        }
+        else{
+            $('.character-card,.enemy-card').addClass('bounceIn')
+        
+            gameState.character.health  = gameState.character.health  - gameState.enemy.baseAttack
+            gameState.enemy.health  = gameState.enemy.health  - gameState.character.baseAttack
+            gameState.character.baseAttack  = gameState.character.baseAttack + Math.floor(Math.random()*40)
+    
+    
+            $('.character-card').find("p.health").html(`❤️${gameState.character.health}`)
+            $('.enemy-card').find("p.health").html(`️️❤️${gameState.enemy.health}`)
+            $('.character-card').find("p.power").html(`👊${gameState.character.baseAttack}`)
+    
+            sleep(250).then(function(){
+                $('.character-card,.enemy-card').removeClass('bounceIn').delay(1000)
+            })
+        }
+
     })
     
 
