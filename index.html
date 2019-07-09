@@ -12,7 +12,7 @@
     <!-- Bootstrap CDN -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
         integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-    
+
     <!-- Jquery CDN -->
     <script src="https://code.jquery.com/jquery-3.4.1.js"
         integrity="sha256-WpOohJOqMqqyKL9FccASB9O0KwACQJpFTUBLTYOVvVU=" crossorigin="anonymous"></script>
@@ -22,6 +22,12 @@
 
     <!-- Custom JS -->
     <script src="./assets/javascript/main.js"></script>
+
+    <!-- Reset CSS -->
+    <link rel="stylesheet" href="./assets/css/reset.css" />
+
+    <!-- Animate CSS -->
+    <link rel="stylesheet" href="./assets/css/animate.css" />
 
     <!-- Custom CSS -->
     <link rel="stylesheet" href="./assets/css/styles.css" />
@@ -38,17 +44,42 @@
 
         <h1>Star Wars game thing 🤷</h1>
 
-        <div class="container">
+        <div class="container character-container ">
             <div class="row">
-                <div class="col-12 " id="character-select">
-                    <h5 id="character-select-title">select your character</h5>
+                <div class="col-12 col-md-8 offset-md-2" id="character-select">
+                    <h5 id="character-select-title">select a character</h5>
                     <div class="container-card">
+                    </div>
+                    <div class="begin-button">
                     </div>
                 </div>
             </div>
         </div>
 
-    </div>  
+        <div class="container game-field" style="display: none;">
+            <h1>Yolo Sweg</h1>
+            <div class="card-container">
+                <div class="row card-arena">
+                    <div class="col-4 character-card">
+                    </div>
+                    <div class="col-4 offset-3 enemy-card">
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-12 game-controls">
+                        <div class="col-4">
+                            <button id="attack"><span>Attack</button>
+                        </div>
+                        <div class="col-8 remaining-enemies">
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+        </div>
+
+    </div>
 </body>
 
 </html>
